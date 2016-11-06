@@ -9,6 +9,7 @@
     // Custom Directive
     function FoundItems() {
         var ddo = {
+            restrict: 'E',
             templateUrl: 'loader/itemsloaderindicator.template.html',
             scope : {
                 list: '<',
@@ -30,6 +31,21 @@
               angular.element(loading_div).css('display', 'none');
             }
         });
+        scope.$watch('list.searchTermEmptyTried', function (newValue, oldValue) {
+            var alert_div = element.find("div")[1];
+            if(newValue)
+                angular.element(alert_div).css('display', 'block');
+            else
+                angular.element(alert_div).css('display', 'none');
+        });
+        scope.$watch('list.resultEmpty', function (newValue, oldValue) {
+            var alert_div = element.find("div")[1];
+            if(newValue)
+                angular.element(alert_div).css('display', 'block');
+            else
+                angular.element(alert_div).css('display', 'none');
+
+        });
     }
 
     // Controller
@@ -38,19 +54,32 @@
         var searchCtrl = this;
         searchCtrl.found = [];
         searchCtrl.loading = false;
+        searchCtrl.searchTermEmptyTried = false;
+        searchCtrl.resultEmpty = false;
 
         searchCtrl.search = function() {
             searchCtrl.loading = true;
-            if(searchCtrl.searchTerm === undefined)
-                searchCtrl.searchTerm = "";
-            var promise = MenuSearchService.getMatchedMenuItems(searchCtrl.searchTerm);
-            promise.then(function (foundedItems) {
+            if(searchCtrl.searchTerm === undefined || searchCtrl.searchTerm === "") {
+                searchCtrl.found = [];
+                searchCtrl.searchTermEmptyTried = true;
                 searchCtrl.loading = false;
-                searchCtrl.found = foundedItems;
-            })
-            .catch(function (error) {
-                console.log("Something went terribly wrong.");
-            });
+            }
+            else {
+                searchCtrl.searchTermEmptyTried = false;
+            // if(searchCtrl.searchTerm !== undefined) {
+                var promise = MenuSearchService.getMatchedMenuItems(searchCtrl.searchTerm);
+                promise.then(function (foundedItems) {
+                    searchCtrl.loading = false;
+                    searchCtrl.found = foundedItems;
+                    if(searchCtrl.found.length===0)
+                        searchCtrl.resultEmpty = true;
+                    else
+                        searchCtrl.resultEmpty = false;
+                })
+                .catch(function (error) {
+                    console.log("Something went terribly wrong.");
+                });
+            }
         };
 
         searchCtrl.removeItem = function (itemIndex) {
