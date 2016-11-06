@@ -1,0 +1,15 @@
+<div class="loader">
+</div>
+<div class="list">
+    <div class="panel panel-success" ng-repeat="item in list.found" class="well">
+        <div class="panel-heading">
+            {{ item.name }}&nbsp;&nbsp;<span class="label label-info">{{ item.short_name }}</span>
+        </div>
+        <div class="panel-body">
+            {{ item.description }}
+            <button class="btn btn-danger btn-sm" ng-click="list.removeItem({index: $index});">
+                Don't want this one!
+            </button>
+        </div>
+    </div>
+</div>
