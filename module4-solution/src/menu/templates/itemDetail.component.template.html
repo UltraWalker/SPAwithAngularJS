@@ -1,0 +1,23 @@
+<div ng-repeat="item in $ctrl.items" class="col-xs-6">
+	<div class="panel panel-warning">
+	 <div class="ribbon"><span>POPULAR</span></div>
+	  <div class="panel-heading">
+	    <h3 class="panel-title">
+	    	<span class="glyphicon glyphicon-cutlery"></span>
+	    	{{ item.name }}
+	    </h3>
+	  </div>
+	  <div class="panel-body">
+	    {{ item.description }}
+	  </div>
+	  <div class="panel-footer">
+	  	<span class="glyphicon glyphicon-apple"></span>
+	  		{{ item.price_small }}
+	  			<span class="glyphicon glyphicon-usd"></span>
+	  	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  	<span class="glyphicon glyphicon-apple" style="font-size:1.5em;"></span>
+	  		{{ item.price_large }}
+	  			<span class="glyphicon glyphicon-usd" style="font-size:1.5em;"></span>
+	  </div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<div class="text-center">
+	<div class="col-xs-4" ng-repeat="item in $ctrl.items" ui-sref="itemDetail({shortName: item.short_name})">
+	  <button class="category btn btn-warning btn-block btn-lg">
+	    <span class="glyphicon glyphicon-grain" aria-hidden="true"></span>
+	    {{ item.name }}
+	    <span class="badge">{{ item.short_name }}</span>
+	  </button>
+	</div>
+</div>
