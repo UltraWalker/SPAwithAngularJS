@@ -15,7 +15,14 @@ function routeConfig ($stateProvider) {
       url: '/myinfo',
       templateUrl: "src/user/myinfo.template.html",
       controller: 'myInfoController',
-      controllerAs: 'profileCtrl'
+      controllerAs: 'profileCtrl',
+      resolve: {
+        MenuItem: ['SubscriptionService', function (SubscriptionService) {
+          if(SubscriptionService.userSubscribed())
+            return SubscriptionService.getMenu4ShortName();
+          return null;
+        }]
+      }
     });
 }
 })();

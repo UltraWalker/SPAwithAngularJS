@@ -33,6 +33,14 @@ function SubscriptionService($http, ApiPath) {
     });
   };
 
+  service.getMenu4ShortName = function () {
+    if(service.user_subscribed)
+      return $http.get(ApiPath + '/menu_items/'+service.user.short_name+'.json').then(function (response) {
+        // console.log(response);
+        return response.data;
+      });
+  };
+
   service.shortNames = function () {
     return $http.get(ApiPath + '/menu_items.json').then(function (response) {
         return response.data;
