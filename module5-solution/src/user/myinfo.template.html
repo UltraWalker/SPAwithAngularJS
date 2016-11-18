@@ -1,0 +1,39 @@
+<div class="container text-center">
+	<!-- If Subscribed! -->
+	<div ng-show="profileCtrl.user_subscribed">
+		<h1>Thanks! You are already subscribed to our newsletter!</h1>
+		<br/>
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				<span class="glyphicon glyphicon-user"></span>
+				Your Information
+			</div>
+			<div class="panel-body" id="myinfo">
+				<h4>
+					<b>Full Name </b>  
+					{{ profileCtrl.user.firstname }} {{ profileCtrl.user.lastname }}    
+				</h4>
+				<h4>
+					<b>Email Address </b>  
+					{{ profileCtrl.user.email }}
+				</h4>
+				<h4> 
+					<b>Phone Number </b>  
+					{{ profileCtrl.user.phone }}
+				</h4>
+				<h4>
+					<b>Favorite Menu Number </b>  
+					{{ profileCtrl.user.short_name.toUpperCase() }}
+				</h4>
+				<!-- what about showing more info for this! -->
+			</div>
+		</div>
+
+	</div>
+	<!-- If Not Subsribed! -->
+	<div ng-hide="profileCtrl.user_subscribed">
+		<!-- <h1>You are not subscribed!</h1> -->
+		<h2>Not Signed Up Yet. <a ui-sref="signup">Sign up Now!</a></h2>
+		<h3>Be first to get our amazing monthly newsletter!!</h3>
+	</div>
+</div>
